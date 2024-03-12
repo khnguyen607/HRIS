@@ -1,0 +1,93 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "Products",
+  "EntityName": "Product",
+  "EntityNamePlural": "Products",
+  "TableName": "Products",
+  "PrimaryKeyType": "int",
+  "BaseClass": "FullAuditedEntity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": false,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": false,
+  "IsMasterDetailPage": false,
+  "GenerateUnitTest": true,
+  "GenerateUiTest": false,
+  "PagePermission": {
+    "Host": false,
+    "Tenant": false
+  },
+  "Properties": [
+    {
+      "Name": "Name",
+      "Type": "string",
+      "MaxLength": 500,
+      "MinLength": 0,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": true,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "Price",
+      "Type": "decimal",
+      "MaxLength": 0,
+      "MinLength": 0,
+      "Range": {
+        "IsRangeSet": true,
+        "MinimumValue": 0.0,
+        "MaximumValue": 16.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "Discount",
+      "Type": "decimal",
+      "MaxLength": 16,
+      "MinLength": 0,
+      "Range": {
+        "IsRangeSet": true,
+        "MinimumValue": 0.0,
+        "MaximumValue": 16.0
+      },
+      "Required": false,
+      "Nullable": true,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    }
+  ],
+  "NavigationProperties": [],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

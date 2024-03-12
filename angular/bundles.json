@@ -1,0 +1,101 @@
+{
+  "styles": [
+    {
+      "output": "src/assets/metronic/themes/default/css/style.bundle.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/css/style.bundle.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/css/style.bundle.rtl.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/css/style.bundle.rtl.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/css/style.dark.bundle.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/css/style.dark.bundle.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/css/style.dark.bundle.rtl.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/css/style.dark.bundle.rtl.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/plugins/global/plugins.bundle.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/plugins/global/plugins.bundle.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/plugins/global/plugins.bundle.rtl.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/plugins/global/plugins.bundle.rtl.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/plugins/global/plugins.dark.bundle.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/plugins/global/plugins.dark.bundle.css"
+      ]
+    },
+    {
+      "output": "src/assets/metronic/themes/default/plugins/global/plugins.dark.bundle.rtl.min.css",
+      "input": [
+        "src/assets/metronic/themes/default/plugins/global/plugins.dark.bundle.rtl.css"
+      ]
+    },
+    {
+      "output": "src/assets/primeng/datatable/css/primeng.datatable.min.css",
+      "input": [
+        "src/assets/primeng/datatable/css/primeng.datatable.css"
+      ]
+    },
+    {
+      "output": "src/assets/primeng/datatable/css/primeng.datatable-rtl.min.css",
+      "input": [
+        "src/assets/primeng/datatable/css/primeng.datatable-rtl.css"
+      ]
+    },
+    {
+      "output": "src/assets/common/styles/metronic-customize.min.css",
+      "input": [
+        "src/assets/common/styles/metronic-customize.css"
+      ]
+    },
+    {
+      "output": "src/assets/common/styles/metronic-customize-angular.min.css",
+      "input": [
+        "src/assets/common/styles/metronic-customize-angular.css"
+      ]
+    },
+    {
+      "output": "src/assets/common/styles/themes/default/metronic-customize.min.css",
+      "input": [
+        "src/assets/common/styles/themes/default/metronic-customize.css"
+      ]
+    },
+    {
+      "output": "src/assets/common/styles/abp-zero-template-rtl.min.css",
+      "input": [
+        "src/assets/common/styles/abp-zero-template-rtl.css"
+      ]
+    },
+    {
+      "output": "src/assets/fonts/fonts-asap-condensed.min.css",
+      "input": [
+        "src/assets/fonts/fonts-asap-condensed.css"
+      ]
+    },
+    {
+      "output": "src/assets/fonts/fonts-montserrat.min.css",
+      "input": [
+        "src/assets/fonts/fonts-montserrat.css"
+      ]
+    }
+  ],
+  "scripts": []
+}
