@@ -33,6 +33,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
                         canLoad: [AppRouteGuard],
                     },
                     {
+                        path: 'hris',
+                        loadChildren: () => import('app/hris/hris.module').then((m) => m.HrisModule), //Lazy load admin module
+                        data: { preload: true },
+                        canLoad: [AppRouteGuard],
+                    },
+                    {
                         path: '**',
                         redirectTo: 'notifications',
                     },
