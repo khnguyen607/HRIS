@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WS.EntityFrameworkCore;
@@ -11,9 +12,10 @@ using WS.EntityFrameworkCore;
 namespace WS.Migrations
 {
     [DbContext(typeof(WSDbContext))]
-    partial class WSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240314093940_Add_EmployeeWorkType")]
+    partial class Add_EmployeeWorkType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1752,48 +1754,6 @@ namespace WS.Migrations
                     b.ToTable("AppChatMessages");
                 });
 
-            modelBuilder.Entity("WS.Employees.Employee", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Department")
-                        .HasColumnType("text");
-
-                    b.Property<long?>("EmployeeWorkTypeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("JobTitle")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SocialSecurity")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeWorkTypeId");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("WS.EmployeeWorkTypes.EmployeeWorkType", b =>
                 {
                     b.Property<long>("Id")
@@ -2443,15 +2403,6 @@ namespace WS.Migrations
                     b.Navigation("DeleterUser");
 
                     b.Navigation("LastModifierUser");
-                });
-
-            modelBuilder.Entity("WS.Employees.Employee", b =>
-                {
-                    b.HasOne("WS.EmployeeWorkTypes.EmployeeWorkType", "EmployeeWorkTypeFk")
-                        .WithMany()
-                        .HasForeignKey("EmployeeWorkTypeId");
-
-                    b.Navigation("EmployeeWorkTypeFk");
                 });
 
             modelBuilder.Entity("WS.MultiTenancy.Payments.SubscriptionPayment", b =>

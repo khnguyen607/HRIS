@@ -4,6 +4,7 @@
         *ngIf="!appSession.tenant || !appSession.tenant.logoId"
         [src]="defaultLogo"
         class="h-35px logo"
+        style="min-height: 120px;"
     />
     <img
         alt="Logo"
@@ -18,5 +19,6 @@
             appSession.tenant.logoId
         "
         class="h-35px logo"
+        style="min-height: 120px;"
     />
 </a>

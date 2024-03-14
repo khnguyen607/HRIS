@@ -1,0 +1,75 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #employeeForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="employee.id">{{l("EditEmployee")}}</span>
+                        <span *ngIf="!employee.id">{{l("CreateNewEmployee")}}</span>
+                    </h4>                    
+                    
+                    
+                 <button type="button" class="btn-close" (click)="close()" aria-label="Close" [disabled]="saving"></button>
+             
+                </div>
+                <div class="modal-body">
+                 
+
+
+					<div class="my-3">
+						<label class="form-label" for="EmployeeWorkTypeType">{{l("EmployeeWorkType")}}</label>
+						<select name="employee.employeeWorkTypeId" [(ngModel)]="employee.employeeWorkTypeId" class="form-select" >
+							<option value="">{{l("SelectAEmployeeWorkType")}}</option>
+							<option *ngFor="let item of allEmployeeWorkTypes" value="{{item.id}}">{{item.displayName}}</option>
+						</select>
+					</div>
+					 
+
+
+								<div class="my-3">
+									<label class="form-label" for="Employee_FullName">{{l("FullName")}}</label>
+									<input type="text" #Employee_FullName="ngModel" id="Employee_FullName" class="form-control" [(ngModel)]="employee.fullName" name="FullName"    />
+								    <validation-messages [formCtrl]="Employee_FullName"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="Employee_Address">{{l("Address")}}</label>
+									<input type="text" #Employee_Address="ngModel" id="Employee_Address" class="form-control" [(ngModel)]="employee.address" name="Address"    />
+								    <validation-messages [formCtrl]="Employee_Address"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="Employee_Phone">{{l("Phone")}}</label>
+									<input type="text" #Employee_Phone="ngModel" id="Employee_Phone" class="form-control" [(ngModel)]="employee.phone" name="Phone"    />
+								    <validation-messages [formCtrl]="Employee_Phone"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="Employee_Department">{{l("Department")}}</label>
+									<input type="text" #Employee_Department="ngModel" id="Employee_Department" class="form-control" [(ngModel)]="employee.department" name="Department"    />
+								    <validation-messages [formCtrl]="Employee_Department"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="Employee_JobTitle">{{l("JobTitle")}}</label>
+									<input type="text" #Employee_JobTitle="ngModel" id="Employee_JobTitle" class="form-control" [(ngModel)]="employee.jobTitle" name="JobTitle"    />
+								    <validation-messages [formCtrl]="Employee_JobTitle"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="Employee_SocialSecurity">{{l("SocialSecurity")}}</label>
+									<input type="text" #Employee_SocialSecurity="ngModel" id="Employee_SocialSecurity" class="form-control" [(ngModel)]="employee.socialSecurity" name="SocialSecurity"    />
+								    <validation-messages [formCtrl]="Employee_SocialSecurity"></validation-messages>
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!employeeForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

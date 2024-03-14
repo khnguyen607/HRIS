@@ -27,33 +27,93 @@ export class AppNavigationService {
             new AppMenuItem(
                 'Nhân viên',
                 '',
-                'flaticon-interface-8',
+                'flaticon-users',
                 '/app/hris/employees',
             ),
             new AppMenuItem(
                 'Tuyển dụng',
                 '',
-                'flaticon-interface-8',
+                'flaticon-chat-2',
                 '',
                 [],
                 [
                     new AppMenuItem(
                         'Đăng tin',
                         'Pages.Recruitments',
-                        'flaticon-map',
+                        'flaticon-multimedia-2',
                         '/app/hris/recruitments'
                     ),
                     new AppMenuItem(
                         'Yêu cầu cơ bản',
                         '',
-                        'flaticon-map',
+                        'flaticon-imac',
                         '/app/hris/basicReqses'
                     ),
                     new AppMenuItem(
                         'Yêu cầu chuyên môn',
                         '',
-                        'flaticon-map',
+                        'flaticon-computer',
                         '/app/hris/technicalReqses'
+                    ),
+                ]
+            ),
+            new AppMenuItem(
+                'Hiệu suất làm việc',
+                '',
+                'flaticon-rocket',
+                '/app/hris/performance',
+            ),
+            new AppMenuItem(
+                'Thời gian & Chấm công',
+                '',
+                'flaticon-clock-2',
+                '',
+                [],
+                [
+                    new AppMenuItem(
+                        'Chấm công',
+                        '',
+                        'flaticon-clock',
+                        '/app/hris/timekeeping'
+                    ),
+                    new AppMenuItem(
+                        'Thời gian làm việc',
+                        '',
+                        'flaticon-clock',
+                        '/app/hris/workSchedule'
+                    ),
+                    new AppMenuItem(
+                        'Lịch nghỉ lễ',
+                        '',
+                        'flaticon-clock',
+                        '/app/hris/vacationschedule'
+                    ),
+                ]
+            ),
+            new AppMenuItem(
+                'Lương thưởng & Phúc lợi',
+                '',
+                'flaticon-coins',
+                '',
+                [],
+                [
+                    new AppMenuItem(
+                        'Quản lý lương thưởng',
+                        '',
+                        'flaticon-medal',
+                        '/app/hris/employeeS&B'
+                    ),
+                    new AppMenuItem(
+                        'Danh sách lương',
+                        '',
+                        'flaticon-piggy-bank',
+                        '/app/hris/employeeSalary'
+                    ),
+                    new AppMenuItem(
+                        'Danh sách phúc lợi',
+                        '',
+                        'flaticon-trophy',
+                        '/app/hris/employeeBenefit'
                     ),
                 ]
             ),
@@ -129,6 +189,7 @@ export class AppNavigationService {
                     ),
                 ]
             ),
+
             // new AppMenuItem(
             //     'DemoUiComponents',
             //     'Pages.DemoUiComponents',

@@ -1,4 +1,8 @@
-﻿using WS.TechnicalReqses.Dtos;
+﻿using WS.Employees.Dtos;
+using WS.Employees;
+using WS.EmployeeWorkTypes.Dtos;
+using WS.EmployeeWorkTypes;
+using WS.TechnicalReqses.Dtos;
 using WS.TechnicalReqses;
 using WS.BasicReqses.Dtos;
 using WS.BasicReqses;
@@ -54,6 +58,10 @@ namespace WS
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditEmployeeDto, Employee>().ReverseMap();
+            configuration.CreateMap<EmployeeDto, Employee>().ReverseMap();
+            configuration.CreateMap<CreateOrEditEmployeeWorkTypeDto, EmployeeWorkType>().ReverseMap();
+            configuration.CreateMap<EmployeeWorkTypeDto, EmployeeWorkType>().ReverseMap();
             configuration.CreateMap<CreateOrEditTechnicalReqsDto, TechnicalReqs>().ReverseMap();
             configuration.CreateMap<TechnicalReqsDto, TechnicalReqs>().ReverseMap();
             configuration.CreateMap<CreateOrEditBasicReqsDto, BasicReqs>().ReverseMap();

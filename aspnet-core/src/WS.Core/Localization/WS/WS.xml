@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="TechnicalReqses">Technical reqses</text>
+  <texts>    <text name="Employees">Employees</text>
+    <text name="Employee">Employee</text>
+    <text name="WS.Employees.Employee">Employee</text>
+    <text name="Department">Department</text>
+    <text name="JobTitle">Job title</text>
+    <text name="SocialSecurity">Social security</text>
+    <text name="EmployeesHeaderInfo">Employees header info</text>
+    <text name="CreateNewEmployee">Create new employee</text>
+    <text name="EditEmployee">Edit employee</text>
+    <text name="DeleteEmployee">Delete employee</text>
+    <text name="EmployeeWorkTypeType">Employee work type type</text>
+    <text name="PickEmployeeWorkType">Pick employee work type</text>
+    <text name="SelectAEmployeeWorkType">Select a employee work type</text>
+    <text name="EmployeeWorkTypes">Employee work types</text>
+    <text name="EmployeeWorkType">Employee work type</text>
+    <text name="CreateNewEmployeeWorkType">Create new employee work type</text>
+    <text name="EditEmployeeWorkType">Edit employee work type</text>
+    <text name="DeleteEmployeeWorkType">Delete employee work type</text>
+    <text name="TechnicalReqses">Technical reqses</text>
     <text name="TechnicalReqs">Technical reqs</text>
     <text name="WS.TechnicalReqses.TechnicalReqs">TechnicalReqs</text>
     <text name="TechnicalReqsesHeaderInfo">Technical reqses header info</text>

@@ -30,6 +30,16 @@ namespace WS.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var employees = pages.CreateChildPermission(AppPermissions.Pages_Employees, L("Employees"));
+            employees.CreateChildPermission(AppPermissions.Pages_Employees_Create, L("CreateNewEmployee"));
+            employees.CreateChildPermission(AppPermissions.Pages_Employees_Edit, L("EditEmployee"));
+            employees.CreateChildPermission(AppPermissions.Pages_Employees_Delete, L("DeleteEmployee"));
+
+            var employeeWorkTypes = pages.CreateChildPermission(AppPermissions.Pages_EmployeeWorkTypes, L("EmployeeWorkTypes"));
+            employeeWorkTypes.CreateChildPermission(AppPermissions.Pages_EmployeeWorkTypes_Create, L("CreateNewEmployeeWorkType"));
+            employeeWorkTypes.CreateChildPermission(AppPermissions.Pages_EmployeeWorkTypes_Edit, L("EditEmployeeWorkType"));
+            employeeWorkTypes.CreateChildPermission(AppPermissions.Pages_EmployeeWorkTypes_Delete, L("DeleteEmployeeWorkType"));
+
             var technicalReqses = pages.CreateChildPermission(AppPermissions.Pages_TechnicalReqses, L("TechnicalReqses"));
             technicalReqses.CreateChildPermission(AppPermissions.Pages_TechnicalReqses_Create, L("CreateNewTechnicalReqs"));
             technicalReqses.CreateChildPermission(AppPermissions.Pages_TechnicalReqses_Edit, L("EditTechnicalReqs"));

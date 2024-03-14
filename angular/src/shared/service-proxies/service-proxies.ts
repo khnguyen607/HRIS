@@ -5098,6 +5098,737 @@ export class EditionServiceProxy {
 }
 
 @Injectable()
+export class EmployeesServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param fullNameFilter (optional) 
+     * @param addressFilter (optional) 
+     * @param phoneFilter (optional) 
+     * @param departmentFilter (optional) 
+     * @param jobTitleFilter (optional) 
+     * @param socialSecurityFilter (optional) 
+     * @param employeeWorkTypeTypeFilter (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(filter: string | undefined, fullNameFilter: string | undefined, addressFilter: string | undefined, phoneFilter: string | undefined, departmentFilter: string | undefined, jobTitleFilter: string | undefined, socialSecurityFilter: string | undefined, employeeWorkTypeTypeFilter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfGetEmployeeForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/GetAll?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (fullNameFilter === null)
+            throw new Error("The parameter 'fullNameFilter' cannot be null.");
+        else if (fullNameFilter !== undefined)
+            url_ += "FullNameFilter=" + encodeURIComponent("" + fullNameFilter) + "&";
+        if (addressFilter === null)
+            throw new Error("The parameter 'addressFilter' cannot be null.");
+        else if (addressFilter !== undefined)
+            url_ += "AddressFilter=" + encodeURIComponent("" + addressFilter) + "&";
+        if (phoneFilter === null)
+            throw new Error("The parameter 'phoneFilter' cannot be null.");
+        else if (phoneFilter !== undefined)
+            url_ += "PhoneFilter=" + encodeURIComponent("" + phoneFilter) + "&";
+        if (departmentFilter === null)
+            throw new Error("The parameter 'departmentFilter' cannot be null.");
+        else if (departmentFilter !== undefined)
+            url_ += "DepartmentFilter=" + encodeURIComponent("" + departmentFilter) + "&";
+        if (jobTitleFilter === null)
+            throw new Error("The parameter 'jobTitleFilter' cannot be null.");
+        else if (jobTitleFilter !== undefined)
+            url_ += "JobTitleFilter=" + encodeURIComponent("" + jobTitleFilter) + "&";
+        if (socialSecurityFilter === null)
+            throw new Error("The parameter 'socialSecurityFilter' cannot be null.");
+        else if (socialSecurityFilter !== undefined)
+            url_ += "SocialSecurityFilter=" + encodeURIComponent("" + socialSecurityFilter) + "&";
+        if (employeeWorkTypeTypeFilter === null)
+            throw new Error("The parameter 'employeeWorkTypeTypeFilter' cannot be null.");
+        else if (employeeWorkTypeTypeFilter !== undefined)
+            url_ += "EmployeeWorkTypeTypeFilter=" + encodeURIComponent("" + employeeWorkTypeTypeFilter) + "&";
+        if (sorting === null)
+            throw new Error("The parameter 'sorting' cannot be null.");
+        else if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfGetEmployeeForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfGetEmployeeForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfGetEmployeeForViewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfGetEmployeeForViewDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfGetEmployeeForViewDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getEmployeeForView(id: number | undefined): Observable<GetEmployeeForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/GetEmployeeForView?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmployeeForView(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmployeeForView(<any>response_);
+                } catch (e) {
+                    return <Observable<GetEmployeeForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetEmployeeForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmployeeForView(response: HttpResponseBase): Observable<GetEmployeeForViewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetEmployeeForViewDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetEmployeeForViewDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getEmployeeForEdit(id: number | undefined): Observable<GetEmployeeForEditOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/GetEmployeeForEdit?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmployeeForEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmployeeForEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<GetEmployeeForEditOutput>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetEmployeeForEditOutput>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmployeeForEdit(response: HttpResponseBase): Observable<GetEmployeeForEditOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetEmployeeForEditOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetEmployeeForEditOutput>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditEmployeeDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param fullNameFilter (optional) 
+     * @param addressFilter (optional) 
+     * @param phoneFilter (optional) 
+     * @param departmentFilter (optional) 
+     * @param jobTitleFilter (optional) 
+     * @param socialSecurityFilter (optional) 
+     * @param employeeWorkTypeTypeFilter (optional) 
+     * @return Success
+     */
+    getEmployeesToExcel(filter: string | undefined, fullNameFilter: string | undefined, addressFilter: string | undefined, phoneFilter: string | undefined, departmentFilter: string | undefined, jobTitleFilter: string | undefined, socialSecurityFilter: string | undefined, employeeWorkTypeTypeFilter: string | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/GetEmployeesToExcel?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (fullNameFilter === null)
+            throw new Error("The parameter 'fullNameFilter' cannot be null.");
+        else if (fullNameFilter !== undefined)
+            url_ += "FullNameFilter=" + encodeURIComponent("" + fullNameFilter) + "&";
+        if (addressFilter === null)
+            throw new Error("The parameter 'addressFilter' cannot be null.");
+        else if (addressFilter !== undefined)
+            url_ += "AddressFilter=" + encodeURIComponent("" + addressFilter) + "&";
+        if (phoneFilter === null)
+            throw new Error("The parameter 'phoneFilter' cannot be null.");
+        else if (phoneFilter !== undefined)
+            url_ += "PhoneFilter=" + encodeURIComponent("" + phoneFilter) + "&";
+        if (departmentFilter === null)
+            throw new Error("The parameter 'departmentFilter' cannot be null.");
+        else if (departmentFilter !== undefined)
+            url_ += "DepartmentFilter=" + encodeURIComponent("" + departmentFilter) + "&";
+        if (jobTitleFilter === null)
+            throw new Error("The parameter 'jobTitleFilter' cannot be null.");
+        else if (jobTitleFilter !== undefined)
+            url_ += "JobTitleFilter=" + encodeURIComponent("" + jobTitleFilter) + "&";
+        if (socialSecurityFilter === null)
+            throw new Error("The parameter 'socialSecurityFilter' cannot be null.");
+        else if (socialSecurityFilter !== undefined)
+            url_ += "SocialSecurityFilter=" + encodeURIComponent("" + socialSecurityFilter) + "&";
+        if (employeeWorkTypeTypeFilter === null)
+            throw new Error("The parameter 'employeeWorkTypeTypeFilter' cannot be null.");
+        else if (employeeWorkTypeTypeFilter !== undefined)
+            url_ += "EmployeeWorkTypeTypeFilter=" + encodeURIComponent("" + employeeWorkTypeTypeFilter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmployeesToExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmployeesToExcel(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmployeesToExcel(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FileDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getAllEmployeeWorkTypeForTableDropdown(): Observable<EmployeeEmployeeWorkTypeLookupTableDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Employees/GetAllEmployeeWorkTypeForTableDropdown";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllEmployeeWorkTypeForTableDropdown(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllEmployeeWorkTypeForTableDropdown(<any>response_);
+                } catch (e) {
+                    return <Observable<EmployeeEmployeeWorkTypeLookupTableDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<EmployeeEmployeeWorkTypeLookupTableDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllEmployeeWorkTypeForTableDropdown(response: HttpResponseBase): Observable<EmployeeEmployeeWorkTypeLookupTableDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(EmployeeEmployeeWorkTypeLookupTableDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<EmployeeEmployeeWorkTypeLookupTableDto[]>(<any>null);
+    }
+}
+
+@Injectable()
+export class EmployeeWorkTypesServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param typeFilter (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(filter: string | undefined, typeFilter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfGetEmployeeWorkTypeForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/EmployeeWorkTypes/GetAll?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (typeFilter === null)
+            throw new Error("The parameter 'typeFilter' cannot be null.");
+        else if (typeFilter !== undefined)
+            url_ += "TypeFilter=" + encodeURIComponent("" + typeFilter) + "&";
+        if (sorting === null)
+            throw new Error("The parameter 'sorting' cannot be null.");
+        else if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfGetEmployeeWorkTypeForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfGetEmployeeWorkTypeForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfGetEmployeeWorkTypeForViewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfGetEmployeeWorkTypeForViewDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfGetEmployeeWorkTypeForViewDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getEmployeeWorkTypeForEdit(id: number | undefined): Observable<GetEmployeeWorkTypeForEditOutput> {
+        let url_ = this.baseUrl + "/api/services/app/EmployeeWorkTypes/GetEmployeeWorkTypeForEdit?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmployeeWorkTypeForEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmployeeWorkTypeForEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<GetEmployeeWorkTypeForEditOutput>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetEmployeeWorkTypeForEditOutput>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmployeeWorkTypeForEdit(response: HttpResponseBase): Observable<GetEmployeeWorkTypeForEditOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetEmployeeWorkTypeForEditOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetEmployeeWorkTypeForEditOutput>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditEmployeeWorkTypeDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/EmployeeWorkTypes/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/EmployeeWorkTypes/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+}
+
+@Injectable()
 export class FriendshipServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -17199,6 +17930,110 @@ export interface ICreateOrEditBasicReqsDto {
     id: number | undefined;
 }
 
+export class CreateOrEditEmployeeDto implements ICreateOrEditEmployeeDto {
+    fullName!: string | undefined;
+    address!: string | undefined;
+    phone!: string | undefined;
+    department!: string | undefined;
+    jobTitle!: string | undefined;
+    socialSecurity!: string | undefined;
+    employeeWorkTypeId!: number | undefined;
+    id!: number | undefined;
+
+    constructor(data?: ICreateOrEditEmployeeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.fullName = _data["fullName"];
+            this.address = _data["address"];
+            this.phone = _data["phone"];
+            this.department = _data["department"];
+            this.jobTitle = _data["jobTitle"];
+            this.socialSecurity = _data["socialSecurity"];
+            this.employeeWorkTypeId = _data["employeeWorkTypeId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditEmployeeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditEmployeeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fullName"] = this.fullName;
+        data["address"] = this.address;
+        data["phone"] = this.phone;
+        data["department"] = this.department;
+        data["jobTitle"] = this.jobTitle;
+        data["socialSecurity"] = this.socialSecurity;
+        data["employeeWorkTypeId"] = this.employeeWorkTypeId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface ICreateOrEditEmployeeDto {
+    fullName: string | undefined;
+    address: string | undefined;
+    phone: string | undefined;
+    department: string | undefined;
+    jobTitle: string | undefined;
+    socialSecurity: string | undefined;
+    employeeWorkTypeId: number | undefined;
+    id: number | undefined;
+}
+
+export class CreateOrEditEmployeeWorkTypeDto implements ICreateOrEditEmployeeWorkTypeDto {
+    type!: string;
+    id!: number | undefined;
+
+    constructor(data?: ICreateOrEditEmployeeWorkTypeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditEmployeeWorkTypeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditEmployeeWorkTypeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface ICreateOrEditEmployeeWorkTypeDto {
+    type: string;
+    id: number | undefined;
+}
+
 export class CreateOrEditRecruitmentCandidateDto implements ICreateOrEditRecruitmentCandidateDto {
     fullName!: string;
     age!: number | undefined;
@@ -18671,6 +19506,150 @@ export interface IEmailSettingsEditDto {
     smtpDomain: string | undefined;
     smtpEnableSsl: boolean;
     smtpUseDefaultCredentials: boolean;
+}
+
+export class EmployeeDto implements IEmployeeDto {
+    fullName!: string | undefined;
+    address!: string | undefined;
+    phone!: string | undefined;
+    department!: string | undefined;
+    jobTitle!: string | undefined;
+    socialSecurity!: string | undefined;
+    employeeWorkTypeId!: number | undefined;
+    id!: number;
+
+    constructor(data?: IEmployeeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.fullName = _data["fullName"];
+            this.address = _data["address"];
+            this.phone = _data["phone"];
+            this.department = _data["department"];
+            this.jobTitle = _data["jobTitle"];
+            this.socialSecurity = _data["socialSecurity"];
+            this.employeeWorkTypeId = _data["employeeWorkTypeId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): EmployeeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fullName"] = this.fullName;
+        data["address"] = this.address;
+        data["phone"] = this.phone;
+        data["department"] = this.department;
+        data["jobTitle"] = this.jobTitle;
+        data["socialSecurity"] = this.socialSecurity;
+        data["employeeWorkTypeId"] = this.employeeWorkTypeId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IEmployeeDto {
+    fullName: string | undefined;
+    address: string | undefined;
+    phone: string | undefined;
+    department: string | undefined;
+    jobTitle: string | undefined;
+    socialSecurity: string | undefined;
+    employeeWorkTypeId: number | undefined;
+    id: number;
+}
+
+export class EmployeeEmployeeWorkTypeLookupTableDto implements IEmployeeEmployeeWorkTypeLookupTableDto {
+    id!: number;
+    displayName!: string | undefined;
+
+    constructor(data?: IEmployeeEmployeeWorkTypeLookupTableDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.displayName = _data["displayName"];
+        }
+    }
+
+    static fromJS(data: any): EmployeeEmployeeWorkTypeLookupTableDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeeEmployeeWorkTypeLookupTableDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["displayName"] = this.displayName;
+        return data; 
+    }
+}
+
+export interface IEmployeeEmployeeWorkTypeLookupTableDto {
+    id: number;
+    displayName: string | undefined;
+}
+
+export class EmployeeWorkTypeDto implements IEmployeeWorkTypeDto {
+    type!: string | undefined;
+    id!: number;
+
+    constructor(data?: IEmployeeWorkTypeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.type = _data["type"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): EmployeeWorkTypeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeeWorkTypeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IEmployeeWorkTypeDto {
+    type: string | undefined;
+    id: number;
 }
 
 export class EntityChangeListDto implements IEntityChangeListDto {
@@ -20718,6 +21697,158 @@ export class GetEditionTenantStatisticsOutput implements IGetEditionTenantStatis
 
 export interface IGetEditionTenantStatisticsOutput {
     editionStatistics: TenantEdition[] | undefined;
+}
+
+export class GetEmployeeForEditOutput implements IGetEmployeeForEditOutput {
+    employee!: CreateOrEditEmployeeDto;
+    employeeWorkTypeType!: string | undefined;
+
+    constructor(data?: IGetEmployeeForEditOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employee = _data["employee"] ? CreateOrEditEmployeeDto.fromJS(_data["employee"]) : <any>undefined;
+            this.employeeWorkTypeType = _data["employeeWorkTypeType"];
+        }
+    }
+
+    static fromJS(data: any): GetEmployeeForEditOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetEmployeeForEditOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employee"] = this.employee ? this.employee.toJSON() : <any>undefined;
+        data["employeeWorkTypeType"] = this.employeeWorkTypeType;
+        return data; 
+    }
+}
+
+export interface IGetEmployeeForEditOutput {
+    employee: CreateOrEditEmployeeDto;
+    employeeWorkTypeType: string | undefined;
+}
+
+export class GetEmployeeForViewDto implements IGetEmployeeForViewDto {
+    employee!: EmployeeDto;
+    employeeWorkTypeType!: string | undefined;
+
+    constructor(data?: IGetEmployeeForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employee = _data["employee"] ? EmployeeDto.fromJS(_data["employee"]) : <any>undefined;
+            this.employeeWorkTypeType = _data["employeeWorkTypeType"];
+        }
+    }
+
+    static fromJS(data: any): GetEmployeeForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetEmployeeForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employee"] = this.employee ? this.employee.toJSON() : <any>undefined;
+        data["employeeWorkTypeType"] = this.employeeWorkTypeType;
+        return data; 
+    }
+}
+
+export interface IGetEmployeeForViewDto {
+    employee: EmployeeDto;
+    employeeWorkTypeType: string | undefined;
+}
+
+export class GetEmployeeWorkTypeForEditOutput implements IGetEmployeeWorkTypeForEditOutput {
+    employeeWorkType!: CreateOrEditEmployeeWorkTypeDto;
+
+    constructor(data?: IGetEmployeeWorkTypeForEditOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employeeWorkType = _data["employeeWorkType"] ? CreateOrEditEmployeeWorkTypeDto.fromJS(_data["employeeWorkType"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetEmployeeWorkTypeForEditOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetEmployeeWorkTypeForEditOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employeeWorkType"] = this.employeeWorkType ? this.employeeWorkType.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGetEmployeeWorkTypeForEditOutput {
+    employeeWorkType: CreateOrEditEmployeeWorkTypeDto;
+}
+
+export class GetEmployeeWorkTypeForViewDto implements IGetEmployeeWorkTypeForViewDto {
+    employeeWorkType!: EmployeeWorkTypeDto;
+
+    constructor(data?: IGetEmployeeWorkTypeForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employeeWorkType = _data["employeeWorkType"] ? EmployeeWorkTypeDto.fromJS(_data["employeeWorkType"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetEmployeeWorkTypeForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetEmployeeWorkTypeForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employeeWorkType"] = this.employeeWorkType ? this.employeeWorkType.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGetEmployeeWorkTypeForViewDto {
+    employeeWorkType: EmployeeWorkTypeDto;
 }
 
 export class GetExpiringTenantsOutput implements IGetExpiringTenantsOutput {
@@ -25077,6 +26208,102 @@ export class PagedResultDtoOfGetBasicReqsForViewDto implements IPagedResultDtoOf
 export interface IPagedResultDtoOfGetBasicReqsForViewDto {
     totalCount: number;
     items: GetBasicReqsForViewDto[] | undefined;
+}
+
+export class PagedResultDtoOfGetEmployeeForViewDto implements IPagedResultDtoOfGetEmployeeForViewDto {
+    totalCount!: number;
+    items!: GetEmployeeForViewDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfGetEmployeeForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(GetEmployeeForViewDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfGetEmployeeForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfGetEmployeeForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfGetEmployeeForViewDto {
+    totalCount: number;
+    items: GetEmployeeForViewDto[] | undefined;
+}
+
+export class PagedResultDtoOfGetEmployeeWorkTypeForViewDto implements IPagedResultDtoOfGetEmployeeWorkTypeForViewDto {
+    totalCount!: number;
+    items!: GetEmployeeWorkTypeForViewDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfGetEmployeeWorkTypeForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(GetEmployeeWorkTypeForViewDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfGetEmployeeWorkTypeForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfGetEmployeeWorkTypeForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfGetEmployeeWorkTypeForViewDto {
+    totalCount: number;
+    items: GetEmployeeWorkTypeForViewDto[] | undefined;
 }
 
 export class PagedResultDtoOfGetRecruitmentCandidateForViewDto implements IPagedResultDtoOfGetRecruitmentCandidateForViewDto {

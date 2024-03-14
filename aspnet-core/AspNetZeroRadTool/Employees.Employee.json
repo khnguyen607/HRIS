@@ -1,0 +1,170 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "Employees",
+  "EntityName": "Employee",
+  "EntityNamePlural": "Employees",
+  "TableName": "Employees",
+  "PrimaryKeyType": "long",
+  "BaseClass": "CreationAuditedEntity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": false,
+  "IsMasterDetailPage": false,
+  "GenerateOverridableEntity": false,
+  "GenerateUnitTest": false,
+  "GenerateUiTest": false,
+  "PagePermission": {
+    "Host": false,
+    "Tenant": false
+  },
+  "Properties": [
+    {
+      "Name": "FullName",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "Address",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "Phone",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "Department",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "JobTitle",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    },
+    {
+      "Name": "SocialSecurity",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      },
+      "ViewType": null,
+      "AdditionalData": {}
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "WS.EmployeeWorkTypes",
+      "ForeignEntityName": "EmployeeWorkType",
+      "ForeignEntityNamePlural": "EmployeeWorkTypes",
+      "IdType": "long",
+      "IsNullable": true,
+      "PropertyName": "EmployeeWorkTypeId",
+      "DisplayPropertyName": "Type",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "Dropdown"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

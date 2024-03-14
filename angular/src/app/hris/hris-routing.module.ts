@@ -22,6 +22,11 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
                         loadChildren: () => import('./basicReqses/basicReqs.module').then(m => m.BasicReqsModule),
                         data: { permission: 'Pages.BasicReqses' }
                     },
+                    {
+                        path: 'employees',
+                        loadChildren: () => import('./employees/employee.module').then(m => m.EmployeeModule),
+                        data: { permission: 'Pages.Employees' }
+                    },
                     { path: '', redirectTo: 'hostDashboard', pathMatch: 'full' },
                     { path: '**', redirectTo: 'hostDashboard' },
                 ],
