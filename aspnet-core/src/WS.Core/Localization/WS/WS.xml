@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="Recruitment">Recruitment</text>
+  <texts>    <text name="TechnicalReqses">Technical reqses</text>
+    <text name="TechnicalReqs">Technical reqs</text>
+    <text name="WS.TechnicalReqses.TechnicalReqs">TechnicalReqs</text>
+    <text name="TechnicalReqsesHeaderInfo">Technical reqses header info</text>
+    <text name="CreateNewTechnicalReqs">Create new technical reqs</text>
+    <text name="EditTechnicalReqs">Edit technical reqs</text>
+    <text name="DeleteTechnicalReqs">Delete technical reqs</text>
+    <text name="BasicReqses">Basic reqses</text>
+    <text name="BasicReqs">Basic reqs</text>
+    <text name="WS.BasicReqses.BasicReqs">BasicReqs</text>
+    <text name="BasicReqsesHeaderInfo">Basic reqses header info</text>
+    <text name="CreateNewBasicReqs">Create new basic reqs</text>
+    <text name="EditBasicReqs">Edit basic reqs</text>
+    <text name="DeleteBasicReqs">Delete basic reqs</text>
+    <text name="Recruitment">Recruitment</text>
     <text name="WS.Recruitments.Recruitment">Recruitment</text>
     <text name="Title">Title</text>
     <text name="Jd">Jd</text>

@@ -6,6 +6,16 @@
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_TechnicalReqses = "Pages.TechnicalReqses";
+        public const string Pages_TechnicalReqses_Create = "Pages.TechnicalReqses.Create";
+        public const string Pages_TechnicalReqses_Edit = "Pages.TechnicalReqses.Edit";
+        public const string Pages_TechnicalReqses_Delete = "Pages.TechnicalReqses.Delete";
+
+        public const string Pages_BasicReqses = "Pages.BasicReqses";
+        public const string Pages_BasicReqses_Create = "Pages.BasicReqses.Create";
+        public const string Pages_BasicReqses_Edit = "Pages.BasicReqses.Edit";
+        public const string Pages_BasicReqses_Delete = "Pages.BasicReqses.Delete";
+
         public const string Pages_Recruitments = "Pages.Recruitments";
         public const string Pages_Recruitments_Create = "Pages.Recruitments.Create";
         public const string Pages_Recruitments_Edit = "Pages.Recruitments.Edit";

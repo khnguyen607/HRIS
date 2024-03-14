@@ -1,4 +1,6 @@
-﻿using WS.Recruitments;
+﻿using WS.TechnicalReqses;
+using WS.BasicReqses;
+using WS.Recruitments;
 using Abp.IdentityServer4vNext;
 using Abp.Zero.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,10 @@ namespace WS.EntityFrameworkCore
 {
     public class WSDbContext : AbpZeroDbContext<Tenant, Role, User, WSDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<TechnicalReqs> TechnicalReqses { get; set; }
+
+        public virtual DbSet<BasicReqs> BasicReqses { get; set; }
+
         public virtual DbSet<Recruitment> Recruitments { get; set; }
 
         public virtual DbSet<RecruitmentCandidate> RecruitmentCandidates { get; set; }

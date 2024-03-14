@@ -1,4 +1,8 @@
-﻿using WS.Recruitments.Dtos;
+﻿using WS.TechnicalReqses.Dtos;
+using WS.TechnicalReqses;
+using WS.BasicReqses.Dtos;
+using WS.BasicReqses;
+using WS.Recruitments.Dtos;
 using WS.Recruitments;
 using Abp.Application.Editions;
 using Abp.Application.Features;
@@ -50,6 +54,10 @@ namespace WS
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditTechnicalReqsDto, TechnicalReqs>().ReverseMap();
+            configuration.CreateMap<TechnicalReqsDto, TechnicalReqs>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBasicReqsDto, BasicReqs>().ReverseMap();
+            configuration.CreateMap<BasicReqsDto, BasicReqs>().ReverseMap();
             configuration.CreateMap<CreateOrEditRecruitmentDto, Recruitment>().ReverseMap();
             configuration.CreateMap<RecruitmentDto, Recruitment>().ReverseMap();
             configuration.CreateMap<CreateOrEditRecruitmentCandidateDto, RecruitmentCandidate>().ReverseMap();

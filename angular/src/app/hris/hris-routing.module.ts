@@ -12,6 +12,16 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
                         loadChildren: () => import('./recruitments/recruitments/recruitment.module').then(m => m.RecruitmentModule),
                         data: { permission: 'Pages.Recruitments' }
                     },
+                    {
+                        path: 'technicalReqses',
+                        loadChildren: () => import('./technicalReqses/technicalReqs.module').then(m => m.TechnicalReqsModule),
+                        data: { permission: 'Pages.TechnicalReqses' }
+                    },
+                    {
+                        path: 'basicReqses',
+                        loadChildren: () => import('./basicReqses/basicReqs.module').then(m => m.BasicReqsModule),
+                        data: { permission: 'Pages.BasicReqses' }
+                    },
                     { path: '', redirectTo: 'hostDashboard', pathMatch: 'full' },
                     { path: '**', redirectTo: 'hostDashboard' },
                 ],

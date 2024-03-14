@@ -10,7 +10,7 @@ export class AppNavigationService {
     constructor(
         private _permissionCheckerService: PermissionCheckerService,
         private _appSessionService: AppSessionService
-    ) {}
+    ) { }
 
     getMenu(): AppMenu {
         return new AppMenu('MainMenu', 'MainMenu', [
@@ -22,8 +22,41 @@ export class AppNavigationService {
             ),
             new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-line-graph', '/app/main/dashboard'),
             new AppMenuItem('Tenants', 'Pages.Tenants', 'flaticon-list-3', '/app/admin/tenants'),
-           
+
             new AppMenuItem('Editions', 'Pages.Editions', 'flaticon-app', '/app/admin/editions'),
+            new AppMenuItem(
+                'Nhân viên',
+                '',
+                'flaticon-interface-8',
+                '/app/hris/employees',
+            ),
+            new AppMenuItem(
+                'Tuyển dụng',
+                '',
+                'flaticon-interface-8',
+                '',
+                [],
+                [
+                    new AppMenuItem(
+                        'Đăng tin',
+                        'Pages.Recruitments',
+                        'flaticon-map',
+                        '/app/hris/recruitments'
+                    ),
+                    new AppMenuItem(
+                        'Yêu cầu cơ bản',
+                        '',
+                        'flaticon-map',
+                        '/app/hris/basicReqses'
+                    ),
+                    new AppMenuItem(
+                        'Yêu cầu chuyên môn',
+                        '',
+                        'flaticon-map',
+                        '/app/hris/technicalReqses'
+                    ),
+                ]
+            ),
             new AppMenuItem(
                 'Administration',
                 '',
@@ -93,33 +126,6 @@ export class AppNavigationService {
                         'Pages.Administration.Tenant.Settings',
                         'flaticon-settings',
                         '/app/admin/tenantSettings'
-                    ),
-                ]
-            ),
-            new AppMenuItem(
-                'Tuyển dụng',
-                '',
-                'flaticon-interface-8',
-                '',
-                [],
-                [
-                    new AppMenuItem(
-                        'Đăng tin',
-                        'Pages.Recruitments',
-                        'flaticon-map',
-                        '/app/hris/recruitments'
-                    ),
-                    new AppMenuItem(
-                        'Yêu cầu cơ bản',
-                        '',
-                        'flaticon-map',
-                        '/app/hris/basicReqs'
-                    ),
-                    new AppMenuItem(
-                        'Yêu cầu chuyên môn',
-                        '',
-                        'flaticon-map',
-                        '/app/hris/technicalReqs'
                     ),
                 ]
             ),

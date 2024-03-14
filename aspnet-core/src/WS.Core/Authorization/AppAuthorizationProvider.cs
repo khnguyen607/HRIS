@@ -30,6 +30,16 @@ namespace WS.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var technicalReqses = pages.CreateChildPermission(AppPermissions.Pages_TechnicalReqses, L("TechnicalReqses"));
+            technicalReqses.CreateChildPermission(AppPermissions.Pages_TechnicalReqses_Create, L("CreateNewTechnicalReqs"));
+            technicalReqses.CreateChildPermission(AppPermissions.Pages_TechnicalReqses_Edit, L("EditTechnicalReqs"));
+            technicalReqses.CreateChildPermission(AppPermissions.Pages_TechnicalReqses_Delete, L("DeleteTechnicalReqs"));
+
+            var basicReqses = pages.CreateChildPermission(AppPermissions.Pages_BasicReqses, L("BasicReqses"));
+            basicReqses.CreateChildPermission(AppPermissions.Pages_BasicReqses_Create, L("CreateNewBasicReqs"));
+            basicReqses.CreateChildPermission(AppPermissions.Pages_BasicReqses_Edit, L("EditBasicReqs"));
+            basicReqses.CreateChildPermission(AppPermissions.Pages_BasicReqses_Delete, L("DeleteBasicReqs"));
+
             var recruitments = pages.CreateChildPermission(AppPermissions.Pages_Recruitments, L("Recruitments"));
             recruitments.CreateChildPermission(AppPermissions.Pages_Recruitments_Create, L("CreateNewRecruitment"));
             recruitments.CreateChildPermission(AppPermissions.Pages_Recruitments_Edit, L("EditRecruitment"));
