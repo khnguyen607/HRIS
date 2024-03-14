@@ -1,0 +1,227 @@
+﻿    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+                       
+                <div class="card-header align-items-center border-0 mt-4">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="font-weight-bolder text-dark">  {{"RecruitmentCandidates" | localize}}</span>
+                    </h3>
+                    <div class="card-toolbar">
+                            <button *ngIf="isGranted('Pages.RecruitmentCandidates.Create')" (click)="createRecruitmentCandidate()" 
+                            class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewRecruitmentCandidate")}}</button>                    
+                    </div>
+                </div>
+            
+            <div class="card-body">
+                <form class="form" autocomplete="off">
+                    <div>
+                        <div class="row align-items-center">
+                            <div class="col-xl-12">
+                                
+                                
+                    <div class="my-3">
+                        <div class="input-group">
+                            <input [(ngModel)]="filterText" name="filterText" autoFocus class="form-control m-input" [placeholder]="l('SearchWithThreeDot')" type="text">
+                            <button (click)="getRecruitmentCandidates()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>                            
+                        </div>
+                    </div>
+            
+                            </div>
+                        </div>
+						 <div class="row" [hidden]="!advancedFiltersAreShown">
+						 	<div class="col-md-12">
+						         
+						     </div>
+
+
+
+							<div class="col-md-3">
+								<div class="my-3">
+									<label for="FullNameFilter">{{l("FullName")}}</label>
+									<input type="text" class="form-control" id="FullNameFilter" name="fullNameFilter" [(ngModel)]="fullNameFilter">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="my-3">
+									<label for="MinAgeFilter">{{l("MinMax")}} {{l("Age")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinAgeFilter" [(ngModel)]="minAgeFilter" placeholder="{{l('MinValue')}}" name="minAgeFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxAgeFilter" placeholder="{{l('MaxValue')}}" name="maxAgeFilter" />
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label for="PhoneFilter">{{l("Phone")}}</label>
+									<input type="text" class="form-control" id="PhoneFilter" name="phoneFilter" [(ngModel)]="phoneFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label for="EmailFilter">{{l("Email")}}</label>
+									<input type="text" class="form-control" id="EmailFilter" name="emailFilter" [(ngModel)]="emailFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label for="CvFilter">{{l("Cv")}}</label>
+									<input type="text" class="form-control" id="CvFilter" name="cvFilter" [(ngModel)]="cvFilter">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="my-3">
+									<label for="MinPointFilter">{{l("MinMax")}} {{l("Point")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinPointFilter" [(ngModel)]="minPointFilter" placeholder="{{l('MinValue')}}" name="minPointFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxPointFilter" placeholder="{{l('MaxValue')}}" name="maxPointFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="my-3">
+									<label for="MinRecruitmentIdFilter">{{l("MinMax")}} {{l("RecruitmentId")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinRecruitmentIdFilter" [(ngModel)]="minRecruitmentIdFilter" placeholder="{{l('MinValue')}}" name="minRecruitmentIdFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxRecruitmentIdFilter" placeholder="{{l('MaxValue')}}" name="maxRecruitmentIdFilter" />
+									</div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-sm-12">
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row align-items-center">
+                    <!--<Primeng-Datatable-Start>-->
+                    <div class="primeng-datatable-container col-12"
+                         [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable
+                                     (onLazyLoad)="getRecruitmentCandidates($event)"
+                                     [value]="primengTableHelper.records"
+                                     rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                     [paginator]="false"
+                                     [lazy]="true"
+                                     [scrollable]="true"
+                                     ScrollWidth="100%"
+                                     [tableStyle]="{'min-width': '50rem'}"
+                                     [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 130px" [hidden]="!isGrantedAny('Pages.RecruitmentCandidates.Edit', 'Pages.RecruitmentCandidates.Delete')">{{l('Actions')}}</th>
+                                    <th style="width: 150px" pSortableColumn="fullName">
+                                        {{l('FullName')}}
+                                        <p-sortIcon field="recruitmentCandidate.fullName"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="age">
+                                        {{l('Age')}}
+                                        <p-sortIcon field="recruitmentCandidate.age"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="phone">
+                                        {{l('Phone')}}
+                                        <p-sortIcon field="recruitmentCandidate.phone"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="email">
+                                        {{l('Email')}}
+                                        <p-sortIcon field="recruitmentCandidate.email"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="cv">
+                                        {{l('Cv')}}
+                                        <p-sortIcon field="recruitmentCandidate.cv"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="point">
+                                        {{l('Point')}}
+                                        <p-sortIcon field="recruitmentCandidate.point"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="recruitmentId">
+                                        {{l('RecruitmentId')}}
+                                        <p-sortIcon field="recruitmentCandidate.recruitmentId"></p-sortIcon>
+                                    </th>
+
+                                </tr>
+                            </ng-template>                           
+							<ng-template pTemplate="body" let-record="$implicit">
+                                <tr>
+                                    <td style="width: 130px"
+                                        [hidden]="!isGrantedAny('Pages.RecruitmentCandidates.Edit', 'Pages.RecruitmentCandidates.Delete')">
+                                       <div class="btn-group dropdown" dropdown container="body">
+                                            <button class="dropdown-toggle btn btn-sm btn-primary" dropdownToggle>
+                                                <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                            </button>
+												<ul class="dropdown-menu"  *dropdownMenu>
+												<li>
+													<a href="javascript:;" class="dropdown-item"
+														(click)="viewRecruitmentCandidateModal.show(record)">{{l('View')}}</a>
+												</li>
+												<li>
+                                                <a href="javascript:;" *ngIf="permission.isGranted('Pages.RecruitmentCandidates.Edit')" class="dropdown-item"
+														(click)="createOrEditRecruitmentCandidateModal.show(recruitmentId,record.recruitmentCandidate.id)">{{l('Edit')}}</a>												
+                                                </li>
+												<li>
+											        <a class="dropdown-item" href="javascript:;" *ngIf="permission.isGranted('Pages.RecruitmentCandidates.Delete')"
+														(click)="deleteRecruitmentCandidate(record.recruitmentCandidate)">{{l('Delete')}}</a>
+												</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('FullName')}}</span>
+											{{record.recruitmentCandidate.fullName}}
+										</td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('Age')}}</span>
+											{{record.recruitmentCandidate.age}}
+										</td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('Phone')}}</span>
+											{{record.recruitmentCandidate.phone}}
+										</td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('Email')}}</span>
+											{{record.recruitmentCandidate.email}}
+										</td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('Cv')}}</span>
+											{{record.recruitmentCandidate.cv}}
+										</td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('Point')}}</span>
+											{{record.recruitmentCandidate.point}}
+										</td>
+                                    <td style="width:150px">
+											<span class="p-column-title"> {{l('RecruitmentId')}}</span>
+											{{record.recruitmentCandidate.recruitmentId}}
+										</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+						<div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage"
+                                         #paginator
+                                         (onPageChange)="getRecruitmentCandidates($event)"
+                                         [totalRecords]="primengTableHelper.totalRecordsCount"
+                                         [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                         [showCurrentPageReport]="true"
+                                         [currentPageReportTemplate]="'TotalRecordsCount' | localize:primengTableHelper.totalRecordsCount"    
+                            >
+                            </p-paginator>
+                        </div>
+                    </div>
+                    <!--<Primeng-Datatable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <masterDetailChild_Recruitment_createOrEditRecruitmentCandidateModal #createOrEditRecruitmentCandidateModal (modalSave)="getRecruitmentCandidates()"></masterDetailChild_Recruitment_createOrEditRecruitmentCandidateModal>    
+    <masterDetailChild_Recruitment_viewRecruitmentCandidateModal #viewRecruitmentCandidateModal></masterDetailChild_Recruitment_viewRecruitmentCandidateModal>
+    

@@ -1,0 +1,73 @@
+﻿<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #recruitmentCandidateForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="recruitmentCandidate.id">{{l("EditRecruitmentCandidate")}}</span>
+                        <span *ngIf="!recruitmentCandidate.id">{{l("CreateNewRecruitmentCandidate")}}</span>
+                    </h4>                    
+                    
+                    
+                 <button type="button" class="btn-close" (click)="close()" aria-label="Close" [disabled]="saving"></button>
+             
+                </div>
+                <div class="modal-body">
+                 
+
+
+
+
+								<div class="my-3">
+									<label class="form-label" for="RecruitmentCandidate_FullName">{{l("FullName")}} *</label>
+									<input type="text" #RecruitmentCandidate_FullName="ngModel" id="RecruitmentCandidate_FullName" class="form-control" [(ngModel)]="recruitmentCandidate.fullName" name="FullName"     required/>
+								    <validation-messages [formCtrl]="RecruitmentCandidate_FullName"></validation-messages>
+								</div>
+					
+								<div class="my5">
+									<label class="form-label" for="RecruitmentCandidate_Age">{{l("Age")}}</label>
+									<input type="number" #RecruitmentCandidate_Age="ngModel" id="RecruitmentCandidate_Age" class="form-control" [(ngModel)]="recruitmentCandidate.age" name="Age"    />
+									<validation-messages [formCtrl]="RecruitmentCandidate_Age"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="RecruitmentCandidate_Phone">{{l("Phone")}}</label>
+									<input type="text" #RecruitmentCandidate_Phone="ngModel" id="RecruitmentCandidate_Phone" class="form-control" [(ngModel)]="recruitmentCandidate.phone" name="Phone"    />
+								    <validation-messages [formCtrl]="RecruitmentCandidate_Phone"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="RecruitmentCandidate_Email">{{l("Email")}}</label>
+									<input type="text" #RecruitmentCandidate_Email="ngModel" id="RecruitmentCandidate_Email" class="form-control" [(ngModel)]="recruitmentCandidate.email" name="Email"    />
+								    <validation-messages [formCtrl]="RecruitmentCandidate_Email"></validation-messages>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="RecruitmentCandidate_Cv">{{l("Cv")}}</label>
+									<input type="text" #RecruitmentCandidate_Cv="ngModel" id="RecruitmentCandidate_Cv" class="form-control" [(ngModel)]="recruitmentCandidate.cv" name="Cv"    />
+								    <validation-messages [formCtrl]="RecruitmentCandidate_Cv"></validation-messages>
+								</div>
+					
+								<div class="my5">
+									<label class="form-label" for="RecruitmentCandidate_Point">{{l("Point")}}</label>
+									<input type="number" #RecruitmentCandidate_Point="ngModel" id="RecruitmentCandidate_Point" class="form-control" [(ngModel)]="recruitmentCandidate.point" name="Point"    />
+									<validation-messages [formCtrl]="RecruitmentCandidate_Point"></validation-messages>
+								</div>
+					
+								<div class="my5">
+									<label class="form-label" for="RecruitmentCandidate_RecruitmentId">{{l("RecruitmentId")}}</label>
+									<input type="number" #RecruitmentCandidate_RecruitmentId="ngModel" id="RecruitmentCandidate_RecruitmentId" class="form-control" [(ngModel)]="recruitmentCandidate.recruitmentId" name="RecruitmentId"    />
+									<validation-messages [formCtrl]="RecruitmentCandidate_RecruitmentId"></validation-messages>
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!recruitmentCandidateForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,6 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>
+  <texts>    <text name="Recruitment">Recruitment</text>
+    <text name="WS.Recruitments.Recruitment">Recruitment</text>
+    <text name="Title">Title</text>
+    <text name="Jd">Jd</text>
+    <text name="RecruitmentsHeaderInfo">Recruitments header info</text>
+    <text name="CreateNewRecruitment">Create new recruitment</text>
+    <text name="EditRecruitment">Edit recruitment</text>
+    <text name="DeleteRecruitment">Delete recruitment</text>
+    <text name="WS.Recruitments.RecruitmentCandidate">RecruitmentCandidate</text>
+    <text name="Age">Age</text>
+    <text name="Phone">Phone</text>
+    <text name="Cv">Cv</text>
+    <text name="Point">Point</text>
+    <text name="RecruitmentId">Recruitment id</text>
+    <text name="RecruitmentCandidatesHeaderInfo">Recruitment candidates header info</text>
+    <text name="RecruitmentCandidates">Recruitment candidates</text>
+    <text name="{0}IsRequired">{0} is required.</text>
+    <text name="RecruitmentTitle">Recruitment title</text>
+    <text name="PickRecruitment">Pick recruitment</text>
+    <text name="SelectARecruitment">Select a recruitment</text>
+    <text name="View">View</text>
+    <text name="Details">Details</text>
+    <text name="Pick">Pick</text>
+    <text name="True">True</text>
+    <text name="False">False</text>
+    <text name="MinValue">Min</text>
+    <text name="MaxValue">Max</text>
+    <text name="Recruitments">Recruitments</text>
+    <text name="RecruitmentCandidate">Recruitment candidate</text>
+    <text name="CreateNewRecruitmentCandidate">Create new recruitment candidate</text>
+    <text name="EditRecruitmentCandidate">Edit recruitment candidate</text>
+    <text name="DeleteRecruitmentCandidate">Delete recruitment candidate</text>
+
     <text name="HomePage">Home page</text>
     <text name="AboutUs">About us</text>
     <text name="Administration">Administration</text>

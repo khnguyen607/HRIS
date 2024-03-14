@@ -29,6 +29,17 @@ namespace WS.Authorization
             //COMMON PERMISSIONS (FOR BOTH OF TENANTS AND HOST)
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
+
+            var recruitments = pages.CreateChildPermission(AppPermissions.Pages_Recruitments, L("Recruitments"));
+            recruitments.CreateChildPermission(AppPermissions.Pages_Recruitments_Create, L("CreateNewRecruitment"));
+            recruitments.CreateChildPermission(AppPermissions.Pages_Recruitments_Edit, L("EditRecruitment"));
+            recruitments.CreateChildPermission(AppPermissions.Pages_Recruitments_Delete, L("DeleteRecruitment"));
+
+            var recruitmentCandidates = pages.CreateChildPermission(AppPermissions.Pages_RecruitmentCandidates, L("RecruitmentCandidates"));
+            recruitmentCandidates.CreateChildPermission(AppPermissions.Pages_RecruitmentCandidates_Create, L("CreateNewRecruitmentCandidate"));
+            recruitmentCandidates.CreateChildPermission(AppPermissions.Pages_RecruitmentCandidates_Edit, L("EditRecruitmentCandidate"));
+            recruitmentCandidates.CreateChildPermission(AppPermissions.Pages_RecruitmentCandidates_Delete, L("DeleteRecruitmentCandidate"));
+
             pages.CreateChildPermission(AppPermissions.Pages_DemoUiComponents, L("DemoUiComponents"));
 
             var administration = pages.CreateChildPermission(AppPermissions.Pages_Administration, L("Administration"));
@@ -52,7 +63,7 @@ namespace WS.Authorization
             languages.CreateChildPermission(AppPermissions.Pages_Administration_Languages_Delete, L("DeletingLanguages"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
             languages.CreateChildPermission(AppPermissions.Pages_Administration_Languages_ChangeTexts, L("ChangingTexts"));
             languages.CreateChildPermission(AppPermissions.Pages_Administration_Languages_ChangeDefaultLanguage, L("ChangeDefaultLanguage"));
-            
+
             administration.CreateChildPermission(AppPermissions.Pages_Administration_AuditLogs, L("AuditLogs"));
 
             var organizationUnits = administration.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits, L("OrganizationUnits"));

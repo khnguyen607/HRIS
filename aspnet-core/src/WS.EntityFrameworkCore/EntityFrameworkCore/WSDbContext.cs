@@ -1,4 +1,5 @@
-﻿using Abp.IdentityServer4vNext;
+﻿using WS.Recruitments;
+using Abp.IdentityServer4vNext;
 using Abp.Zero.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +18,10 @@ namespace WS.EntityFrameworkCore
 {
     public class WSDbContext : AbpZeroDbContext<Tenant, Role, User, WSDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<Recruitment> Recruitments { get; set; }
+
+        public virtual DbSet<RecruitmentCandidate> RecruitmentCandidates { get; set; }
+
         /* Define an IDbSet for each entity of the application */
 
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }

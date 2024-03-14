@@ -7,11 +7,11 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
             {
                 path: '',
                 children: [
-                    // {
-                    //     path: 'users',
-                    //     loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
-                    //     data: { permission: 'Pages.Administration.Users' },
-                    // },
+                    {
+                        path: 'recruitments',
+                        loadChildren: () => import('./recruitments/recruitments/recruitment.module').then(m => m.RecruitmentModule),
+                        data: { permission: 'Pages.Recruitments' }
+                    },
                     { path: '', redirectTo: 'hostDashboard', pathMatch: 'full' },
                     { path: '**', redirectTo: 'hostDashboard' },
                 ],

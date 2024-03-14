@@ -9198,6 +9198,613 @@ export class ProfileServiceProxy {
 }
 
 @Injectable()
+export class RecruitmentCandidatesServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param fullNameFilter (optional) 
+     * @param maxAgeFilter (optional) 
+     * @param minAgeFilter (optional) 
+     * @param phoneFilter (optional) 
+     * @param emailFilter (optional) 
+     * @param cvFilter (optional) 
+     * @param maxPointFilter (optional) 
+     * @param minPointFilter (optional) 
+     * @param maxRecruitmentIdFilter (optional) 
+     * @param minRecruitmentIdFilter (optional) 
+     * @param recruitmentIdFilter (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(filter: string | undefined, fullNameFilter: string | undefined, maxAgeFilter: number | undefined, minAgeFilter: number | undefined, phoneFilter: string | undefined, emailFilter: string | undefined, cvFilter: string | undefined, maxPointFilter: number | undefined, minPointFilter: number | undefined, maxRecruitmentIdFilter: number | undefined, minRecruitmentIdFilter: number | undefined, recruitmentIdFilter: number | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfGetRecruitmentCandidateForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/RecruitmentCandidates/GetAll?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (fullNameFilter === null)
+            throw new Error("The parameter 'fullNameFilter' cannot be null.");
+        else if (fullNameFilter !== undefined)
+            url_ += "FullNameFilter=" + encodeURIComponent("" + fullNameFilter) + "&";
+        if (maxAgeFilter === null)
+            throw new Error("The parameter 'maxAgeFilter' cannot be null.");
+        else if (maxAgeFilter !== undefined)
+            url_ += "MaxAgeFilter=" + encodeURIComponent("" + maxAgeFilter) + "&";
+        if (minAgeFilter === null)
+            throw new Error("The parameter 'minAgeFilter' cannot be null.");
+        else if (minAgeFilter !== undefined)
+            url_ += "MinAgeFilter=" + encodeURIComponent("" + minAgeFilter) + "&";
+        if (phoneFilter === null)
+            throw new Error("The parameter 'phoneFilter' cannot be null.");
+        else if (phoneFilter !== undefined)
+            url_ += "PhoneFilter=" + encodeURIComponent("" + phoneFilter) + "&";
+        if (emailFilter === null)
+            throw new Error("The parameter 'emailFilter' cannot be null.");
+        else if (emailFilter !== undefined)
+            url_ += "EmailFilter=" + encodeURIComponent("" + emailFilter) + "&";
+        if (cvFilter === null)
+            throw new Error("The parameter 'cvFilter' cannot be null.");
+        else if (cvFilter !== undefined)
+            url_ += "CvFilter=" + encodeURIComponent("" + cvFilter) + "&";
+        if (maxPointFilter === null)
+            throw new Error("The parameter 'maxPointFilter' cannot be null.");
+        else if (maxPointFilter !== undefined)
+            url_ += "MaxPointFilter=" + encodeURIComponent("" + maxPointFilter) + "&";
+        if (minPointFilter === null)
+            throw new Error("The parameter 'minPointFilter' cannot be null.");
+        else if (minPointFilter !== undefined)
+            url_ += "MinPointFilter=" + encodeURIComponent("" + minPointFilter) + "&";
+        if (maxRecruitmentIdFilter === null)
+            throw new Error("The parameter 'maxRecruitmentIdFilter' cannot be null.");
+        else if (maxRecruitmentIdFilter !== undefined)
+            url_ += "MaxRecruitmentIdFilter=" + encodeURIComponent("" + maxRecruitmentIdFilter) + "&";
+        if (minRecruitmentIdFilter === null)
+            throw new Error("The parameter 'minRecruitmentIdFilter' cannot be null.");
+        else if (minRecruitmentIdFilter !== undefined)
+            url_ += "MinRecruitmentIdFilter=" + encodeURIComponent("" + minRecruitmentIdFilter) + "&";
+        if (recruitmentIdFilter === null)
+            throw new Error("The parameter 'recruitmentIdFilter' cannot be null.");
+        else if (recruitmentIdFilter !== undefined)
+            url_ += "RecruitmentIdFilter=" + encodeURIComponent("" + recruitmentIdFilter) + "&";
+        if (sorting === null)
+            throw new Error("The parameter 'sorting' cannot be null.");
+        else if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfGetRecruitmentCandidateForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfGetRecruitmentCandidateForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfGetRecruitmentCandidateForViewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfGetRecruitmentCandidateForViewDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfGetRecruitmentCandidateForViewDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getRecruitmentCandidateForEdit(id: number | undefined): Observable<GetRecruitmentCandidateForEditOutput> {
+        let url_ = this.baseUrl + "/api/services/app/RecruitmentCandidates/GetRecruitmentCandidateForEdit?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetRecruitmentCandidateForEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetRecruitmentCandidateForEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<GetRecruitmentCandidateForEditOutput>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetRecruitmentCandidateForEditOutput>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetRecruitmentCandidateForEdit(response: HttpResponseBase): Observable<GetRecruitmentCandidateForEditOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetRecruitmentCandidateForEditOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetRecruitmentCandidateForEditOutput>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditRecruitmentCandidateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/RecruitmentCandidates/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/RecruitmentCandidates/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+}
+
+@Injectable()
+export class RecruitmentsServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param titleFilter (optional) 
+     * @param jdFilter (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(filter: string | undefined, titleFilter: string | undefined, jdFilter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfGetRecruitmentForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/Recruitments/GetAll?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (titleFilter === null)
+            throw new Error("The parameter 'titleFilter' cannot be null.");
+        else if (titleFilter !== undefined)
+            url_ += "TitleFilter=" + encodeURIComponent("" + titleFilter) + "&";
+        if (jdFilter === null)
+            throw new Error("The parameter 'jdFilter' cannot be null.");
+        else if (jdFilter !== undefined)
+            url_ += "JdFilter=" + encodeURIComponent("" + jdFilter) + "&";
+        if (sorting === null)
+            throw new Error("The parameter 'sorting' cannot be null.");
+        else if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfGetRecruitmentForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfGetRecruitmentForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfGetRecruitmentForViewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfGetRecruitmentForViewDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfGetRecruitmentForViewDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getRecruitmentForView(id: number | undefined): Observable<GetRecruitmentForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/Recruitments/GetRecruitmentForView?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetRecruitmentForView(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetRecruitmentForView(<any>response_);
+                } catch (e) {
+                    return <Observable<GetRecruitmentForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetRecruitmentForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetRecruitmentForView(response: HttpResponseBase): Observable<GetRecruitmentForViewDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetRecruitmentForViewDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetRecruitmentForViewDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getRecruitmentForEdit(id: number | undefined): Observable<GetRecruitmentForEditOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Recruitments/GetRecruitmentForEdit?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetRecruitmentForEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetRecruitmentForEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<GetRecruitmentForEditOutput>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetRecruitmentForEditOutput>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetRecruitmentForEdit(response: HttpResponseBase): Observable<GetRecruitmentForEditOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetRecruitmentForEditOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetRecruitmentForEditOutput>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditRecruitmentDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Recruitments/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Recruitments/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+}
+
+@Injectable()
 export class RoleServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -15782,6 +16389,114 @@ export interface ICreateInvoiceDto {
     subscriptionPaymentId: number;
 }
 
+export class CreateOrEditRecruitmentCandidateDto implements ICreateOrEditRecruitmentCandidateDto {
+    fullName!: string;
+    age!: number | undefined;
+    phone!: string | undefined;
+    email!: string | undefined;
+    cv!: string | undefined;
+    point!: number;
+    recruitmentId!: number;
+    id!: number | undefined;
+
+    constructor(data?: ICreateOrEditRecruitmentCandidateDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.fullName = _data["fullName"];
+            this.age = _data["age"];
+            this.phone = _data["phone"];
+            this.email = _data["email"];
+            this.cv = _data["cv"];
+            this.point = _data["point"];
+            this.recruitmentId = _data["recruitmentId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditRecruitmentCandidateDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditRecruitmentCandidateDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fullName"] = this.fullName;
+        data["age"] = this.age;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        data["cv"] = this.cv;
+        data["point"] = this.point;
+        data["recruitmentId"] = this.recruitmentId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface ICreateOrEditRecruitmentCandidateDto {
+    fullName: string;
+    age: number | undefined;
+    phone: string | undefined;
+    email: string | undefined;
+    cv: string | undefined;
+    point: number;
+    recruitmentId: number;
+    id: number | undefined;
+}
+
+export class CreateOrEditRecruitmentDto implements ICreateOrEditRecruitmentDto {
+    title!: string;
+    jd!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: ICreateOrEditRecruitmentDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.title = _data["title"];
+            this.jd = _data["jd"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditRecruitmentDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditRecruitmentDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["title"] = this.title;
+        data["jd"] = this.jd;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface ICreateOrEditRecruitmentDto {
+    title: string;
+    jd: string | undefined;
+    id: number | undefined;
+}
+
 export class CreateOrganizationUnitInput implements ICreateOrganizationUnitInput {
     parentId!: number | undefined;
     displayName!: string;
@@ -19699,6 +20414,150 @@ export interface IGetRecentTenantsOutput {
     recentTenants: RecentTenant[] | undefined;
 }
 
+export class GetRecruitmentCandidateForEditOutput implements IGetRecruitmentCandidateForEditOutput {
+    recruitmentCandidate!: CreateOrEditRecruitmentCandidateDto;
+
+    constructor(data?: IGetRecruitmentCandidateForEditOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.recruitmentCandidate = _data["recruitmentCandidate"] ? CreateOrEditRecruitmentCandidateDto.fromJS(_data["recruitmentCandidate"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetRecruitmentCandidateForEditOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetRecruitmentCandidateForEditOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["recruitmentCandidate"] = this.recruitmentCandidate ? this.recruitmentCandidate.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGetRecruitmentCandidateForEditOutput {
+    recruitmentCandidate: CreateOrEditRecruitmentCandidateDto;
+}
+
+export class GetRecruitmentCandidateForViewDto implements IGetRecruitmentCandidateForViewDto {
+    recruitmentCandidate!: RecruitmentCandidateDto;
+
+    constructor(data?: IGetRecruitmentCandidateForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.recruitmentCandidate = _data["recruitmentCandidate"] ? RecruitmentCandidateDto.fromJS(_data["recruitmentCandidate"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetRecruitmentCandidateForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetRecruitmentCandidateForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["recruitmentCandidate"] = this.recruitmentCandidate ? this.recruitmentCandidate.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGetRecruitmentCandidateForViewDto {
+    recruitmentCandidate: RecruitmentCandidateDto;
+}
+
+export class GetRecruitmentForEditOutput implements IGetRecruitmentForEditOutput {
+    recruitment!: CreateOrEditRecruitmentDto;
+
+    constructor(data?: IGetRecruitmentForEditOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.recruitment = _data["recruitment"] ? CreateOrEditRecruitmentDto.fromJS(_data["recruitment"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetRecruitmentForEditOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetRecruitmentForEditOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["recruitment"] = this.recruitment ? this.recruitment.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGetRecruitmentForEditOutput {
+    recruitment: CreateOrEditRecruitmentDto;
+}
+
+export class GetRecruitmentForViewDto implements IGetRecruitmentForViewDto {
+    recruitment!: RecruitmentDto;
+
+    constructor(data?: IGetRecruitmentForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.recruitment = _data["recruitment"] ? RecruitmentDto.fromJS(_data["recruitment"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetRecruitmentForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetRecruitmentForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["recruitment"] = this.recruitment ? this.recruitment.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IGetRecruitmentForViewDto {
+    recruitment: RecruitmentDto;
+}
+
 export class GetRegionalStatsOutput implements IGetRegionalStatsOutput {
     stats!: RegionalStatCountry[] | undefined;
 
@@ -23178,6 +24037,102 @@ export interface IPagedResultDtoOfGetAllSendAttemptsOutput {
     items: GetAllSendAttemptsOutput[] | undefined;
 }
 
+export class PagedResultDtoOfGetRecruitmentCandidateForViewDto implements IPagedResultDtoOfGetRecruitmentCandidateForViewDto {
+    totalCount!: number;
+    items!: GetRecruitmentCandidateForViewDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfGetRecruitmentCandidateForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(GetRecruitmentCandidateForViewDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfGetRecruitmentCandidateForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfGetRecruitmentCandidateForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfGetRecruitmentCandidateForViewDto {
+    totalCount: number;
+    items: GetRecruitmentCandidateForViewDto[] | undefined;
+}
+
+export class PagedResultDtoOfGetRecruitmentForViewDto implements IPagedResultDtoOfGetRecruitmentForViewDto {
+    totalCount!: number;
+    items!: GetRecruitmentForViewDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfGetRecruitmentForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(GetRecruitmentForViewDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfGetRecruitmentForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfGetRecruitmentForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfGetRecruitmentForViewDto {
+    totalCount: number;
+    items: GetRecruitmentForViewDto[] | undefined;
+}
+
 export class PagedResultDtoOfLanguageTextListDto implements IPagedResultDtoOfLanguageTextListDto {
     totalCount!: number;
     items!: LanguageTextListDto[] | undefined;
@@ -23895,6 +24850,114 @@ export interface IRecentTenant {
     id: number;
     name: string | undefined;
     creationTime: DateTime;
+}
+
+export class RecruitmentCandidateDto implements IRecruitmentCandidateDto {
+    fullName!: string | undefined;
+    age!: number | undefined;
+    phone!: string | undefined;
+    email!: string | undefined;
+    cv!: string | undefined;
+    point!: number;
+    recruitmentId!: number;
+    id!: number;
+
+    constructor(data?: IRecruitmentCandidateDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.fullName = _data["fullName"];
+            this.age = _data["age"];
+            this.phone = _data["phone"];
+            this.email = _data["email"];
+            this.cv = _data["cv"];
+            this.point = _data["point"];
+            this.recruitmentId = _data["recruitmentId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): RecruitmentCandidateDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new RecruitmentCandidateDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fullName"] = this.fullName;
+        data["age"] = this.age;
+        data["phone"] = this.phone;
+        data["email"] = this.email;
+        data["cv"] = this.cv;
+        data["point"] = this.point;
+        data["recruitmentId"] = this.recruitmentId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IRecruitmentCandidateDto {
+    fullName: string | undefined;
+    age: number | undefined;
+    phone: string | undefined;
+    email: string | undefined;
+    cv: string | undefined;
+    point: number;
+    recruitmentId: number;
+    id: number;
+}
+
+export class RecruitmentDto implements IRecruitmentDto {
+    title!: string | undefined;
+    jd!: string | undefined;
+    id!: number;
+
+    constructor(data?: IRecruitmentDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.title = _data["title"];
+            this.jd = _data["jd"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): RecruitmentDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new RecruitmentDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["title"] = this.title;
+        data["jd"] = this.jd;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IRecruitmentDto {
+    title: string | undefined;
+    jd: string | undefined;
+    id: number;
 }
 
 export class RefreshTokenResult implements IRefreshTokenResult {
